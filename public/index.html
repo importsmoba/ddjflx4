@@ -656,32 +656,53 @@ document.addEventListener("DOMContentLoaded", function() {
   font-family: Arial, sans-serif;
   box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
 ">
-  <div style="max-width: 80%;">
-    Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa 
-    <a href="#" style="color:#4da3ff; text-decoration:underline;">Política de Cookies</a>.
+  <div style="max-width: 75%; line-height: 1.4;">
+    Este site utiliza cookies para melhorar sua experiência.  
+    Leia nossa <a href="#" style="color:#4da3ff; text-decoration:underline;">Política de Cookies</a>.
   </div>
 
-  <button onclick="aceitarCookies()" style="
-    background: #4da3ff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    color: #000;
-    cursor: pointer;
-    font-weight: bold;
-  ">
-    Aceitar
-  </button>
+  <div style="display:flex; gap:10px;">
+    <button onclick="recusarCookies()" style="
+      background: transparent;
+      border: 2px solid #ff4d4d;
+      padding: 10px 18px;
+      border-radius: 6px;
+      color: #ff4d4d;
+      cursor: pointer;
+      font-weight: bold;
+    ">
+      Recusar
+    </button>
+
+    <button onclick="aceitarCookies()" style="
+      background: #4da3ff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+    ">
+      Aceitar
+    </button>
+  </div>
 </div>
 
 <script>
-  // Oculta o banner caso o usuário já tenha aceitado
-  if (localStorage.getItem("cookies_aceitos") === "sim") {
+  // Ocultar o banner se o usuário já escolheu alguma opção
+  const escolha = localStorage.getItem("cookies_preferencia");
+
+  if (escolha === "aceito" || escolha === "recusado") {
     document.getElementById("cookie-banner").style.display = "none";
   }
 
   function aceitarCookies() {
-    localStorage.setItem("cookies_aceitos", "sim");
+    localStorage.setItem("cookies_preferencia", "aceito");
+    document.getElementById("cookie-banner").style.display = "none";
+  }
+
+  function recusarCookies() {
+    localStorage.setItem("cookies_preferencia", "recusado");
     document.getElementById("cookie-banner").style.display = "none";
   }
 </script>
